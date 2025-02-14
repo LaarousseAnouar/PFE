@@ -1,54 +1,77 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png';  // Assurez-vous que ce fichier existe
-import { FaUser, FaGlobe, FaStethoscope } from "react-icons/fa"; // Icônes React
+import React, { useState } from 'react';
 
 const Navbar = () => {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-primary px-4">
-      <div className="container-fluid">
-        
-        {/* Logo */}
-        <Link className="navbar-brand text-white fw-bold" to="/">
-          <img src={logo} alt="DabaDoc" width="120" className="me-2" />
-        </Link>
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // حالة المستخدم: مسجل أم لا
 
-        {/* Bouton Responsive */}
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span className="navbar-toggler-icon"></span>
+  const handleLogin = () => {
+    // هنا يتم توجيه المستخدم إلى صفحة تسجيل الدخول
+    window.location.href = "/login";
+  };
+
+  const handleSignup = () => {
+    // هنا يتم توجيه المستخدم إلى صفحة إنشاء حساب جديد
+    window.location.href = "/signup";
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // تسجيل الخروج
+    window.location.href = "/"; // إعادة توجيه المستخدم إلى الصفحة الرئيسية
+  };
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-primary">
+      <div className="container d-flex justify-content-end">
+        
+        {/* زر "Vous êtes un praticien ?" */}
+        <button className="btn btn-warning fw-bold me-2">
+           Vous êtes un praticien ?
         </button>
 
-        {/* Liens du menu */}
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
-            
-            {/* Bouton pour les praticiens */}
-            <li className="nav-item">
-              <Link className="btn btn-warning text-dark fw-bold me-2" to="/practitioner">
-                <FaStethoscope /> Vous êtes un praticien ?
-              </Link>
-            </li>
+        {/* قائمة "Mon Compte" */}
+        <div className="dropdown">
+          <button 
+            className="btn btn-light fw-bold me-2 dropdown-toggle"
+            onClick={() => setDropdownOpen(!isDropdownOpen)}
+          >
+             Mon Compte
+          </button>
 
-            {/* Bouton Mon Compte */}
-            <li className="nav-item">
-              <Link className="btn btn-light text-dark me-2" to="/profile">
-                <FaUser /> Mon Compte
-              </Link>
-            </li>
-
-            {/* Sélecteur de langue */}
-            <li className="nav-item">
-              <button className="btn btn-outline-light me-2">
-                <FaGlobe /> 🇲🇦 Maroc
-              </button>
-            </li>
-
-            <li className="nav-item">
-              <button className="btn btn-outline-light">🇸🇦 Arabe</button>
-            </li>
-
-          </ul>
+          {isDropdownOpen && (
+            <ul className="dropdown-menu show">
+              {isLoggedIn ? (
+                // إذا كان المستخدم متصلًا، عرض خيارات الحساب
+                <>
+                  <li><a className="dropdown-item" href="/profile"> Mon Profil</a></li>
+                  <li><a className="dropdown-item" href="/appointments">Mes Rendez-vous</a></li>
+                  <li><a className="dropdown-item" href="/settings">⚙️ Paramètres</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
+                    <button className="dropdown-item text-danger" onClick={handleLogout}>
+                       Déconnexion
+                    </button>
+                  </li>
+                </>
+              ) : (
+                // إذا لم يكن المستخدم متصلًا، عرض أزرار تسجيل الدخول وإنشاء الحساب
+                <>
+                  <li><button className="dropdown-item" onClick={handleLogin}> Se connecter</button></li>
+                  <li><button className="dropdown-item" onClick={handleSignup}> Créer un compte</button></li>
+                </>
+              )}
+            </ul>
+          )}
         </div>
+
+        {/* زر اختيار البلد */}
+        <button className="btn btn-outline-light fw-bold me-2">
+          🌍 MA Maroc
+        </button>
+
+        {/* زر تغيير اللغة */}
+        <button className="btn btn-outline-light fw-bold">
+          🌐 Arabe
+        </button>
 
       </div>
     </nav>

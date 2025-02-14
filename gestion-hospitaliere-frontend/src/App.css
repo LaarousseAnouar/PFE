@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
@@ -43,4 +44,65 @@ body {
 
 h2 {
   color: #007bff;
+}
+/* Assurer que l'image reste carrée et bien alignée */
+.doctor-image {
+  width: 80px !important; /* Modifier la taille comme tu veux */
+  height: 80px !important; /* Assurer que l'image reste carrée */
+  object-fit: cover !important; /* Éviter la déformation */
+  border-radius: 10px !important; /* Faire un carré avec des bords légèrement arrondis */
+  border: 2px solid #007bff !important; /* Ajouter une bordure bleue */
+}
+/* Effet au survol : agrandissement léger */
+.doctor-image:hover {
+  transform: scale(1.05);
+}
+
+/* Style du bouton Afficher Tél */
+.btn-show-phone {
+  font-size: 1.1rem; /* Augmenter légèrement la taille du texte */
+  padding: 10px 20px; /* Ajouter du padding pour un meilleur affichage */
+  transition: background-color 0.3s, color 0.3s; /* Animation fluide */
+}
+/* Effet au survol du bouton */
+.btn-show-phone:hover {
+  background-color: #007bff;
+  color: white;
+}
+/* تحسين شكل زر Mon Compte */
+.dropdown .dropdown-toggle {
+  background-color: white !important;
+  color: black !important;
+  border: none !important;
+}
+
+/* تنسيق القائمة المنسدلة */
+.dropdown-menu {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  right: 0;
+  top: 40px;
+  z-index: 1000;
+  width: 180px;
+}
+
+/* تنسيق عناصر القائمة */
+.dropdown-menu .dropdown-item {
+  padding: 10px;
+  font-size: 14px;
+  color: black;
+  transition: background 0.3s ease-in-out;
+}
+
+/* تغيير لون العناصر عند التمرير عليها */
+.dropdown-menu .dropdown-item:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* تنسيق زر تسجيل الخروج */
+.dropdown-menu .dropdown-item.text-danger {
+  color: red !important;
 }
