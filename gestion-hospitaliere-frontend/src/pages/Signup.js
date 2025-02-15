@@ -2,21 +2,26 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const navigate = useNavigate(); // Hook pour la redirection
+  const navigate = useNavigate();
 
   const handleSignup = (event) => {
-    event.preventDefault(); // Empêcher le rechargement de la page
+    event.preventDefault();
 
-    // Simuler une inscription réussie (remplacer plus tard par un backend)
+    // حفظ حالة تسجيل الدخول في localStorage بعد إنشاء الحساب
+    localStorage.setItem('isLoggedIn', 'true');
+
     console.log("Utilisateur inscrit !");
     
-    // Rediriger vers la page principale de l'hôpital
+    // إعادة التوجيه إلى الصفحة الرئيسية
     navigate('/home');
+
+    // إعادة تحميل الصفحة لضمان تحديث Navbar
+    window.location.reload();
   };
 
   return (
     <div className="container mt-5">
-      <h2>🆕 Créer un compte</h2>
+      <h2> Créer un compte</h2>
       <form onSubmit={handleSignup}>
         <div className="mb-3">
           <label>Nom</label>

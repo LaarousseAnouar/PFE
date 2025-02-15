@@ -2,21 +2,26 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const navigate = useNavigate(); // Hook pour la redirection
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
-    event.preventDefault(); // Empêcher le rechargement de la page
+    event.preventDefault();
 
-    // Simuler une connexion réussie (remplacer plus tard par une vraie authentification)
+    // حفظ حالة تسجيل الدخول في localStorage
+    localStorage.setItem('isLoggedIn', 'true');
+
     console.log("Utilisateur connecté !");
     
-    // Rediriger vers la page principale de l'hôpital
+    // إعادة التوجيه إلى الصفحة الرئيسية
     navigate('/home');
+
+    // إعادة تحميل الصفحة لضمان تحديث Navbar
+    window.location.reload();
   };
 
   return (
     <div className="container mt-5">
-      <h2>🔑 Se connecter</h2>
+      <h2> Se connecter</h2>
       <form onSubmit={handleLogin}>
         <div className="mb-3">
           <label>Email</label>
