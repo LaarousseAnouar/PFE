@@ -1,10 +1,23 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const navigate = useNavigate(); // Hook pour la redirection
+
+  const handleSignup = (event) => {
+    event.preventDefault(); // Empêcher le rechargement de la page
+
+    // Simuler une inscription réussie (remplacer plus tard par un backend)
+    console.log("Utilisateur inscrit !");
+    
+    // Rediriger vers la page principale de l'hôpital
+    navigate('/home');
+  };
+
   return (
     <div className="container mt-5">
       <h2>🆕 Créer un compte</h2>
-      <form>
+      <form onSubmit={handleSignup}>
         <div className="mb-3">
           <label>Nom</label>
           <input type="text" className="form-control" required />
